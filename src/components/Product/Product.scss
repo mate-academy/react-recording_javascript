@@ -4,6 +4,10 @@
   border: 3px solid #00f;
   border-radius: 10px;
 
+  &--free {
+    background: lightgreen;
+  }
+
   &__title {
     margin: 0 0 .5em;
     text-decoration: underline;
