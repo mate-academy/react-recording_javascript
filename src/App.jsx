@@ -1,19 +1,19 @@
-import { Product } from './components/Product/Product';
+import goods from './goods.json';
 
 export const App = () => (
   <div className="App">
-    <h1>My Shop</h1>
+    <h1>Goods List</h1>
 
-    <Product
-      title="Peperoni Pizza"
-      price={100}
-    />
-    <Product
-      title="Chocklate Cake"
-      price={30}
-    />
-    <Product
-      title="Water"
-    />
+    <div className="GoodList">
+      {goods.map(good => (
+        <div
+          key={good.id}
+          className="GoodCard"
+          style={{ color: good.color }}
+        >
+          {good.name}
+        </div>
+      ))}
+    </div>
   </div>
 );
