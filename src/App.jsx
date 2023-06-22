@@ -1,27 +1,20 @@
-import { useState } from "react";
+import goodsFromServer from './goods.json';
+import { GoodList } from './components/GoodList/GoodList';
 
 export const App = () => {
-  const [value, setValue] = useState(0);
-  const [message, setMessage] = useState('');
-
-  console.log('rendering', value);
-
   return (
     <div className="App">
-      <h1>Value is {value}</h1>
-      <p>{message}</p>
-  
-      {[1, 2, 3, 4, 5].map(x => (
-        <button 
-          onClick={() => {
-            setValue(x);
-            setMessage(message + x);
-          }}
-        >
-          {x}
-        </button>
-      ))}
-      
+      <header>
+        <button>Reverse</button>
+
+        <div>
+          Sort by:
+          <button>name</button>
+          <button>color</button>
+        </div>
+      </header>
+
+      <GoodList goods={goodsFromServer} />
     </div>
   );
-}
+};
