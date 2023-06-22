@@ -1,10 +1,27 @@
-import { GoodList } from './components/GoodList';
-import goods from './goods.json';
+import { useState } from "react";
 
-export const App = () => (
-  <div className="App">
-    <h1>Goods List</h1>
+export const App = () => {
+  const [value, setValue] = useState(0);
+  const [message, setMessage] = useState('');
 
-    <GoodList goods={goods.slice(0, 5)} />
-  </div>
-);
+  console.log('rendering', value);
+
+  return (
+    <div className="App">
+      <h1>Value is {value}</h1>
+      <p>{message}</p>
+  
+      {[1, 2, 3, 4, 5].map(x => (
+        <button 
+          onClick={() => {
+            setValue(x);
+            setMessage(message + x);
+          }}
+        >
+          {x}
+        </button>
+      ))}
+      
+    </div>
+  );
+}
