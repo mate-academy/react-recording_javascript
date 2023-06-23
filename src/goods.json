@@ -1,15 +1,15 @@
 [
-  { "id": 1, "name": "Potato", "color": "red" },
-  { "id": 2, "name": "Pear", "color": "green" },
-  { "id": 3, "name": "Mellon", "color": "blue" },
-  { "id": 4, "name": "Ice cream", "color": "red" },
-  { "id": 5, "name": "Apple", "color": "green" },
-  { "id": 6, "name": "Bread", "color": "blue" },
-  { "id": 7, "name": "Fish", "color": "red" },
-  { "id": 8, "name": "Honey", "color": "green" },
-  { "id": 9, "name": "Jam", "color": "blue" },
-  { "id": 10, "name": "Garlic", "color": "red" },
-  { "id": 11, "name": "Dumplings", "color": "red" },
-  { "id": 12, "name": "Carrot", "color": "green" },
-  { "id": 13, "name": "Eggs", "color": "blue" }
+  { "id": 2, "color": "#080", "name": "Pear" },
+  { "id": 3, "color": "#00f", "name": "Mellon" },
+  { "id": 4, "color": "#f00", "name": "Ice cream" },
+  { "id": 5, "color": "#080", "name": "Apple" },
+  { "id": 6, "color": "#00f", "name": "Bread" },
+  { "id": 7, "color": "#f00", "name": "Fish" },
+  { "id": 8, "color": "#080", "name": "Honey" },
+  { "id": 1, "color": "#f00", "name": "Potato" },
+  { "id": 9, "color": "#00f", "name": "Jam" },
+  { "id": 10, "color": "#f00", "name": "Garlic" },
+  { "id": 11, "color": "#f00", "name": "Dumplings" },
+  { "id": 12, "color": "#080", "name": "Carrot" },
+  { "id": 13, "color": "#00f", "name": "Eggs" }
 ]
