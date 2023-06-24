@@ -2,11 +2,27 @@ import cn from 'classnames';
 
 import { SORT_FIELD } from "../../constants";
 
-export const Header = ({ sortField, sortBy }) => (
+export const Header = ({ 
+  sortField, 
+  sortBy,
+  query,
+  filterBy,
+}) => (
   <header>
-    <button onClick={() => sortBy('')}>
+    <button onClick={() => {
+      sortBy('');
+      filterBy('');
+    }}>
       Reset
     </button>
+
+    <input
+      value={query}
+      type="text"
+      onChange={(event) => {
+        filterBy(event.currentTarget.value);
+      }}
+    />
 
     <div>
       Sort by:

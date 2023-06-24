@@ -33,7 +33,12 @@ function getPreparedGoods(goods, { sortField, query }) {
 
 export const App = () => {
   const [sortField, setSortField] = useState('');
-  const visibleGoods = getPreparedGoods(goodsFromServer, { sortField });
+  const [query, setQuery] = useState('');
+
+  const visibleGoods = getPreparedGoods(
+    goodsFromServer,
+    { sortField, query },
+  );
 
   return (
     <div className="App">
@@ -41,6 +46,10 @@ export const App = () => {
         sortField={sortField}
         sortBy={(field) => {
           setSortField(field);
+        }}
+        query={query}
+        filterBy={(newQuery) => {
+          setQuery(newQuery);
         }}
       />
       <GoodList goods={visibleGoods} />
