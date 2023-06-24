@@ -2,4 +2,6 @@
   padding: 12px 0;
   display: grid;
   gap: 8px;
+
+  grid-template-columns: repeat(4, max-content)
 }

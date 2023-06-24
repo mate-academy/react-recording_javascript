@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import goodsFromServer from './goods.json';
-import { GoodList } from './components/GoodList/GoodList';
+import { GoodList } from './components/GoodList';
+import { Header } from './components/Header';
 import { SORT_FIELD } from './constants';
-import { Header } from './components/Header/Header';
+import goodsFromServer from './goods.json';
 
 function getPreparedGoods(goods, { sortField, query }) {
   let prepearedGoods = [...goods];
@@ -32,6 +32,7 @@ function getPreparedGoods(goods, { sortField, query }) {
 }
 
 export const App = () => {
+  const [goods, setGoods] = useState(goodsFromServer);
   const [sortField, setSortField] = useState('');
   const [query, setQuery] = useState('');
 
@@ -40,19 +41,58 @@ export const App = () => {
     { sortField, query },
   );
 
+  const moveUp = (good) => {
+    const index = goods.indexOf(good);
+
+    if (index < 1) {
+      return;
+    }
+
+    setGoods([
+      ...goods.slice(0, index - 1),
+      goods[index],
+      goods[index - 1],
+      ...goods.slice(index + 1),
+    ]);
+  };
+
+  const moveDown = (good) => {
+    setGoods((currentGoods) => {
+      console.log(currentGoods.map(g => g.name));
+      const index = currentGoods.indexOf(good);
+  
+      if (index === currentGoods.length - 1) {
+        return;
+      }
+
+      return [
+        ...currentGoods.slice(0, index),
+        currentGoods[index + 1],
+        currentGoods[index],
+        ...currentGoods.slice(index + 2),
+      ];
+    });
+  };
+
   return (
     <div className="App">
-      <Header
-        sortField={sortField}
-        sortBy={(field) => {
-          setSortField(field);
-        }}
-        query={query}
-        filterBy={(newQuery) => {
-          setQuery(newQuery);
-        }}
+      {false && (
+        <Header
+          sortField={sortField}
+          sortBy={(field) => {
+            setSortField(field);
+          }}
+          query={query}
+          filterBy={(newQuery) => {
+            setQuery(newQuery);
+          }}
+        />
+      )}
+      <GoodList
+        goods={goods}
+        moveUp={moveUp}
+        moveDown={moveDown}
       />
-      <GoodList goods={visibleGoods} />
     </div>
   );
 };
