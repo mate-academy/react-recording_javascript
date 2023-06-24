@@ -1,48 +1,48 @@
 import { useState } from 'react';
-import cn from 'classnames';
 
 import goodsFromServer from './goods.json';
 import { GoodList } from './components/GoodList/GoodList';
+import { SORT_FIELD } from './constants';
+import { Header } from './components/Header/Header';
 
-const SORT_FIELD_ID = 'id';
+function getPreparedGoods(goods, { sortField, query }) {
+  let prepearedGoods = [...goods];
+
+  if (query) {
+    prepearedGoods = prepearedGoods.filter(good => good.name.includes(query));
+  }
+
+  if (sortField) {
+    prepearedGoods.sort((good1, good2) => {
+      switch (sortField) {
+        case SORT_FIELD.ID:
+          return good1[sortField] - good2[sortField];
+
+        case SORT_FIELD.NAME:
+        case SORT_FIELD.COLOR:
+          return good1[sortField].localeCompare(good2[sortField]);
+
+        default:
+          return 0;
+      }
+    });
+  }
+
+  return prepearedGoods;
+}
 
 export const App = () => {
-  const [visibleGoods, setVisibleGoods] = useState(goodsFromServer);
   const [sortField, setSortField] = useState('');
-
-  const reset = () => {
-    setVisibleGoods(goodsFromServer);
-    setSortField('');
-  };
-
-  const sortById = () => {
-    setVisibleGoods(
-      [...visibleGoods].sort((good1, good2) => good1.id - good2.id)
-    );
-    setSortField(SORT_FIELD_ID);
-  };
+  const visibleGoods = getPreparedGoods(goodsFromServer, { sortField });
 
   return (
     <div className="App">
-      <header>
-        <button onClick={reset}>
-          Reset
-        </button>
-
-        <div>
-          Sort by:
-          <button 
-            onClick={sortById} 
-            className={cn({ active: sortField === SORT_FIELD_ID })}
-          >
-            id
-          </button>
-
-          <button>name</button>
-          <button>color</button>
-        </div>
-      </header>
-
+      <Header
+        sortField={sortField}
+        sortBy={(field) => {
+          setSortField(field);
+        }}
+      />
       <GoodList goods={visibleGoods} />
     </div>
   );
